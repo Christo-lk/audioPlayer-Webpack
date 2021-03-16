@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.box{
+  @apply w-72 h-72 bg-blue-500
+}
