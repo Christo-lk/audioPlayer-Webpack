@@ -64,7 +64,7 @@ button {
   margin: 0 auto 15px;
 }
 
-.audio-controls .prev svg,
+/* .audio-controls .prev svg,
 .audio-controls .next svg {
   width: 35px;
   height: 35px;
@@ -74,7 +74,7 @@ button {
 .audio-controls .pause svg {
   height: 40px;
   width: 40px;
-}
+} */
 
 .audio-controls path {
   fill: var(--white);

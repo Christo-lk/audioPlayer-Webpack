@@ -16,7 +16,7 @@ export default function AudioControls ({
       <div className="audio-controls">
         {/* Pause Button */}
         <button type='button' className='prev' aria-label='prev' onClick={onPrevClick}>
-          <img src={Prev}/>
+          <img src={Prev} className="w-10"/>
         </button>
 
         { isPlaying
@@ -27,6 +27,10 @@ export default function AudioControls ({
             <img src={Play} className="w-10" />
           </button>
         }
+
+        <button type='button' className='next' aria-label='next' onClick={onNextClick}>
+          <img src={Next} className="w-10"/>
+        </button>
 
       </div>
     </>
