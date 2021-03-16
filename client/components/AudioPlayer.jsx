@@ -14,11 +14,14 @@ export default function AudioPlayer ({ tracks }) {
   // Define UseRefs
 
   const audioRef = useRef(new Audio(audioSrc))
+
   const intervalRef = useRef()
   const isReady = useRef(false)
 
   const { duration } = audioRef.current
 
+  console.log('duration:', duration)
+  console.log('audioRef:', audioRef)
   // Change Track Functions
   const toPrevTrack = () => {
     console.log('prev:', trackIndex)
