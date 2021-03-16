@@ -2,7 +2,6 @@ import React from 'react'
 import AudioPlayer from './AudioPlayer'
 
 const App = () => {
-
   const tracks = [{
     title: 'We Are The People',
     artist: 'Empire Of The Sun',

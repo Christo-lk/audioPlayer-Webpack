@@ -21,12 +21,33 @@ export default function AudioPlayer ({ tracks }) {
 
   // Change Track Functions
   const toPrevTrack = () => {
-    console.log('TODO go to prev')
+    console.log('prev:', trackIndex)
+    if (trackIndex - 1 < 0) {
+      setTrackIndex(tracks.length - 1)
+    } else {
+      setTrackIndex(trackIndex - 1)
+    }
   }
 
   const toNextTrack = () => {
-    console.log('TODO go to next')
+    console.log('next:', trackIndex)
+    if (trackIndex < tracks.length - 1) {
+      setTrackIndex(trackIndex + 1)
+    } else {
+      setTrackIndex(0)
+    }
   }
+
+  // USE EFFECT HOOKS
+
+  // PLAY/PAUSE TRACK
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play()
+    } else {
+      audioRef.current.pause()
+    }
+  }, [isPlaying])
 
   return (
     <>
