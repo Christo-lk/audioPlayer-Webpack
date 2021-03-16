@@ -49,6 +49,31 @@ export default function AudioPlayer ({ tracks }) {
     }
   }, [isPlaying])
 
+  useEffect(() => {
+    // Pause and clean up on unmount
+    return () => {
+      audioRef.current.pause()
+      clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  // USE EFFECT FOR CHANGING TRACKS
+  useEffect(() => {
+    audioRef.current.pause()
+
+    audioRef.current = new Audio(audioSrc)
+    setTrackProgress(audioRef.current.currentTime)
+
+    if (isReady.current) {
+      audioRef.current.play()
+      setIsPlaying(true)
+      // startTimer()
+    } else {
+      // Set the isReady ref as true for the next pass
+      isReady.current = true
+    }
+  }, [trackIndex])
+
   return (
     <>
       <div className="audio-player">
