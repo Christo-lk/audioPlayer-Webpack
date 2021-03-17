@@ -20,8 +20,8 @@ export default function AudioPlayer ({ tracks }) {
 
   const { duration } = audioRef.current
 
-  console.log('duration:', duration)
-  console.log('audioRef:', audioRef)
+  // FUNCTIONS
+
   // Change Track Functions
   const toPrevTrack = () => {
     console.log('prev:', trackIndex)
@@ -41,12 +41,27 @@ export default function AudioPlayer ({ tracks }) {
     }
   }
 
+  function startTimer () {
+    // clears any timers that are running
+    clearInterval(intervalRef.current)
+    console.log('ivc:', audioRef.current.currentTime)
+
+    intervalRef.current = setInterval(() => {
+      if (audioRef.current.ended) {
+        toNextTrack()
+      } else {
+        setTrackProgress(audioRef.current.currentTime)
+      }
+    }, [1000])
+  }
+
   // USE EFFECT HOOKS
 
   // PLAY/PAUSE TRACK
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play()
+      startTimer()
     } else {
       audioRef.current.pause()
     }
@@ -70,7 +85,7 @@ export default function AudioPlayer ({ tracks }) {
     if (isReady.current) {
       audioRef.current.play()
       setIsPlaying(true)
-      // startTimer()
+      startTimer()
     } else {
       // Set the isReady ref as true for the next pass
       isReady.current = true
@@ -89,6 +104,15 @@ export default function AudioPlayer ({ tracks }) {
             onPrevClick={toPrevTrack}
             onNextClick={toNextTrack}
             onPlayPauseClick={setIsPlaying} />
+          <input
+            type='range'
+            value={trackProgress}
+            step='1'
+            min='0'
+            max={duration || `${duration}`}
+            className="progress"
+            
+            />
         </div>
       </div>
 
