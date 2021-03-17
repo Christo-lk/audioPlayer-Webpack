@@ -22,6 +22,13 @@ export default function AudioPlayer ({ tracks }) {
 
   // FUNCTIONS
 
+  // % completion of track
+  const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : '0%'
+
+  const trackStyling = `
+  -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
+`
+
   // Change Track Functions
   const toPrevTrack = () => {
     console.log('prev:', trackIndex)
@@ -129,7 +136,7 @@ export default function AudioPlayer ({ tracks }) {
             onChange={(e) => onScrub(e.currentTarget.value)}
             onMouseUp={onScrubEnd}
             onKeyUp={onScrubEnd}
-
+            style={{ background: trackStyling }}
           />
         </div>
       </div>
