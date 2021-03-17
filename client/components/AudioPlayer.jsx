@@ -55,6 +55,21 @@ export default function AudioPlayer ({ tracks }) {
     }, [1000])
   }
 
+  function onScrub (value) {
+    // clears any timers already running
+    clearInterval(intervalRef.current)
+    audioRef.current.currentTime = value
+    setTrackProgress(audioRef.current.currentTime)
+  }
+
+  function onScrubEnd () {
+    // If not already playing, start
+    if (!isPlaying) {
+      setIsPlaying(true)
+    }
+    startTimer()
+  }
+
   // USE EFFECT HOOKS
 
   // PLAY/PAUSE TRACK
@@ -111,8 +126,11 @@ export default function AudioPlayer ({ tracks }) {
             min='0'
             max={duration || `${duration}`}
             className="progress"
-            
-            />
+            onChange={(e) => onScrub(e.currentTarget.value)}
+            onMouseUp={onScrubEnd}
+            onKeyUp={onScrubEnd}
+
+          />
         </div>
       </div>
 
